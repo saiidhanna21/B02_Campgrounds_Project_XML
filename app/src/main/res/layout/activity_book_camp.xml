@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookCamp"
+    android:orientation="vertical"
+    android:background="#f8fafc"
+    >
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start"
+        android:layout_margin="2dp"
+        android:background="#f8fafc"
+        android:contentDescription="Go Back"
+        android:minHeight="40dp"
+        android:src="@drawable/back_arrow"
+        android:onClick="back_cancel"/>
+
+    <TextView
+        android:id="@+id/bookText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Book Campground"
+        style="@style/headerTextStyle"
+        android:layout_marginTop="33dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:id="@+id/detailsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:text="Enter Your Details:"
+        style="@style/HintTextStyle"
+        />
+
+    <Spinner
+        android:id="@+id/startDate"
+        style="@style/HintTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/input_background"
+        android:hint="Start Date"
+        android:inputType="date"
+        android:minHeight="48dp"
+        android:paddingLeft="10dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/endDate"
+        style="@style/HintTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/input_background"
+        android:hint="Start Date"
+        android:inputType="date"
+        android:minHeight="48dp"
+        android:paddingLeft="10dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:background="@drawable/input_background"
+        android:id="@+id/numberOfPersons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:hint="Number Of Persons"
+        style="@style/HintTextStyle"
+        android:minHeight="48dp"
+        android:inputType="number"/>
+
+    <EditText
+        android:background="@drawable/input_background"
+        android:id="@+id/phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:hint="Phone Number"
+        style="@style/HintTextStyle"
+        android:minHeight="48dp"
+        android:inputType="phone"/>
+
+    <TextView
+        android:background="@drawable/input_background"
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:text="Total 6Price"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:paddingHorizontal="10dp"
+        style="@style/textStyle"
+        android:minHeight="48dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Book"
+        android:textColor="@color/button_text_color"
+        android:onClick="book"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/button_background"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:onClick="back_cancel"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/button_text_color"
+        android:background="@drawable/button_background"/>
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="start"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical" style="@style/groupStylebluegray_800">
+
+    <FrameLayout android:layout_gravity="end"
+        android:layout_height="337dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="16dp" android:layout_width="381dp">
+
+        <TextView android:gravity="top|start"
+            android:layout_gravity="top|start"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9.5dp"
+            android:layout_marginEnd="11dp"
+            android:layout_width="match_parent"
+            android:singleLine="true"
+            android:text="Campgrounds"
+            style="@style/txtSoraregular24" tools:text="Campgrounds"/>
+
+        <ImageView
+            android:background="@drawable/img"
+            android:layout_width="257dp"
+            android:layout_height="327dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="28dp"
+        />
+
+        <View
+            android:background="@drawable/rectange_home"
+            android:layout_gravity="top|end"
+            android:layout_height="11dp"
+            android:layout_marginBottom="11.5dp"
+            android:layout_marginEnd="172dp"
+            android:layout_marginStart="171dp"
+            android:layout_marginTop="11.5dp" android:layout_width="11dp"/>
+    </FrameLayout>
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_marginEnd="31dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="11.4dp"
+        android:layout_width="match_parent"
+        android:text="Let's get started"
+        style="@style/txtSoraregular48" tools:text="Let's get started"/>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28.5dp"
+        android:layout_marginStart="28.5dp"
+        android:layout_marginTop="13.5dp"
+        android:layout_width="match_parent"
+        android:singleLine="true"
+        android:text="Everything start from here"
+        style="@style/txtSorabold16_1"/>
+    <Button
+        android:gravity="center"
+        android:id="@+id/login"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:paddingBottom="13dp"
+        android:paddingEnd="33dp"
+        android:paddingStart="33dp"
+        android:paddingTop="13dp"
+        android:onClick="login"
+        android:text="Log in"
+        android:textAllCaps="false"
+        android:background="@drawable/button_background"
+        style="@style/btnSolidRoundedOutline" tools:text="Log In"/>
+    <Button
+        android:gravity="center"
+        android:id="@+id/signup"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="9dp"
+        android:layout_width="match_parent"
+        android:paddingBottom="13dp"
+        android:paddingEnd="33dp"
+        android:paddingStart="33dp"
+        android:paddingTop="13dp"
+        android:onClick="signup"
+        android:text="Sign up"
+        android:textAllCaps="false"
+        style="@style/btnSolidRoundedOutline" tools:text="Sign Up"/>
+</LinearLayout>
