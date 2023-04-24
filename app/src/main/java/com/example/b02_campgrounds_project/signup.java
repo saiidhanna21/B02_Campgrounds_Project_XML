@@ -1,30 +1,24 @@
 package com.example.b02_campgrounds_project;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 public class signup extends AppCompatActivity {
 
@@ -106,7 +100,7 @@ public class signup extends AppCompatActivity {
                             Toast toast = Toast.makeText(getApplicationContext(), "Email already exists. Try again", Toast.LENGTH_LONG);
                             toast.show();
                         }else{
-                            Intent intent = new Intent(signup.this, index.class);
+                            Intent intent = new Intent(signup.this, getDbCamp.class);
                             intent.putExtra("username", username_text);
                             startActivity(intent);
                         }
@@ -122,6 +116,5 @@ public class signup extends AppCompatActivity {
     public void back(View v){
         super.onBackPressed();
     }
-
 
 }

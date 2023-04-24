@@ -1,14 +1,13 @@
 package com.example.b02_campgrounds_project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,7 +74,7 @@ public class login extends AppCompatActivity {
                             Toast toast = Toast.makeText(getApplicationContext(),"Username/email or Password incorrect! Try Again",Toast.LENGTH_LONG);
                             toast.show();
                         }else{
-                            Intent intent = new Intent(login.this,index.class);
+                            Intent intent = new Intent(login.this,getDbCamp.class);
                             intent.putExtra("username",j.getString("username"));
                             intent.putExtra("source","login");
                             startActivity(intent);

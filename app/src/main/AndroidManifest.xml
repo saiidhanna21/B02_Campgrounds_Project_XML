@@ -13,6 +13,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".getImages"
+            android:exported="false" />
+        <activity
+            android:name=".showCamp"
+            android:exported="false" />
+        <activity
             android:name=".signup"
             android:exported="true" />
         <activity
@@ -30,9 +36,11 @@
         <activity
             android:name=".BookCamp"
             android:exported="true" />
-
         <activity
             android:name=".index"
+            android:exported="true" />
+        <activity
+            android:name=".getDbCamp"
             android:exported="true" />
         
     </application>

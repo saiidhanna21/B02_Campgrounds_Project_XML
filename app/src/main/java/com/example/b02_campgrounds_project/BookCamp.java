@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,13 +26,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class BookCamp extends Activity {
     Spinner startDate, endDate;
@@ -41,6 +37,9 @@ public class BookCamp extends Activity {
     Double price,totalPrice;
     TextView price_text;
     ArrayList<String> dates = new ArrayList<String>();
+    Bundle info;
+    String username,source="";
+    int campId,userId;
 
 
     private final String url = "http://192.168.1.105/CampProject/booking.php";
@@ -55,6 +54,12 @@ public class BookCamp extends Activity {
         numberOfPersons = (EditText) this.findViewById(R.id.numberOfPersons);
         phoneNumber = (EditText) this.findViewById(R.id.phoneNumber);
         price_text = (TextView) this.findViewById(R.id.price);
+        info=getIntent().getExtras();
+        if(info!=null) {
+            username= (String) info.get("username");
+            campId= (int) info.get("CampId");
+            userId = (int) info.get("UserId");
+        }
 
         class dbManager extends AsyncTask<String,Void,String> {
 
@@ -83,23 +88,33 @@ public class BookCamp extends Activity {
             protected String doInBackground(String... strings) {
                 try{
                     URL url1 = new URL(strings[0]);
+
                     HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    String data = "campground_id=" + URLEncoder.encode(strings[1], "UTF-8");
+                    OutputStream os = conn.getOutputStream();
+                    os.write(data.getBytes());
+                    os.flush();
+                    os.close();
+
                     BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuffer data = new StringBuffer();
+                    StringBuffer data1 = new StringBuffer();
                     String line;
 
                     while((line=br.readLine()) != null){
-                        data.append(line+"\n");
+                        data1.append(line+"\n");
                     }
                     br.close();
-                    return data.toString();
+                    return data1.toString();
                 }catch(Exception e){
                     return e.getMessage();
                 }
             }
         }
         dbManager obj = new dbManager();
-        obj.execute(url);
+        obj.execute(url,String.valueOf(campId));
 
         startDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -178,7 +193,8 @@ public class BookCamp extends Activity {
                                 + "&phoneNumber=" + URLEncoder.encode(strings[4], "UTF-8")
                                 + "&totalPrice=" + URLEncoder.encode(strings[5], "UTF-8")
                                 + "&campground_id=" + URLEncoder.encode(strings[6], "UTF-8")
-                                + "&daysDiff=" + URLEncoder.encode(strings[7], "UTF-8");
+                                + "&daysDiff=" + URLEncoder.encode(strings[7], "UTF-8")
+                                + "&user_id=" + URLEncoder.encode(strings[8], "UTF-8");
                         OutputStream os = conn.getOutputStream();
                         os.write(data.getBytes());
                         os.flush();
@@ -201,11 +217,17 @@ public class BookCamp extends Activity {
                             Toast toast = Toast.makeText(getApplicationContext(), "Error, while connecting to the database", Toast.LENGTH_LONG);
                             toast.show();
                         }else if(response.equals("notAvailable")){
-                            Toast toast = Toast.makeText(getApplicationContext(),"There is "+j.getString("available_camps") +" Camps available in "+j.getString("date"),Toast.LENGTH_LONG);
+                            Toast toast = Toast.makeText(getApplicationContext(),"There is only "+j.getString("available_camps") +" Camps available in "+j.getString("date"),Toast.LENGTH_LONG);
                             toast.show();
                         }else{
-                            Intent intent = new Intent(BookCamp.this,index.class);
-                            //intent.putExtra("username",j.getString("username"));
+                            Intent intent = new Intent(BookCamp.this,getDbCamp.class);
+                            intent.putExtra("username",username);
+                            if(info.containsKey("source")){
+                                source="source";
+                                intent.putExtra("source","login");
+                            }
+                            Toast toast = Toast.makeText(getApplicationContext(), "You successfully booked this campground", Toast.LENGTH_LONG);
+                            toast.show();
                             startActivity(intent);
                         }
                     } catch (JSONException e) {
@@ -214,7 +236,7 @@ public class BookCamp extends Activity {
                 }
             }
             DatabaseInsertionTask task = new DatabaseInsertionTask();
-            task.execute(url2, startDate_text,endDate_text,numberOfPersons_text,phoneNumber_text, String.valueOf(totalPrice), String.valueOf(69),String.valueOf(daysDiffValue));
+            task.execute(url2,startDate_text,endDate_text,numberOfPersons_text,phoneNumber_text, String.valueOf(totalPrice), String.valueOf(campId),String.valueOf(daysDiffValue),String.valueOf(userId));
         }
     }
 
