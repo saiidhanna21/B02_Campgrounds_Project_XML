@@ -8,16 +8,22 @@
     android:orientation="horizontal">
 
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="360dp"
-        tools:ignore="SpeakableTextPresentCheck">
-        <LinearLayout
-            android:id="@+id/displayImages"
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"></LinearLayout>
-    </HorizontalScrollView>
+            android:layout_height="360dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/displayImages">
+
+
+
+
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
 
     <ImageButton
         android:id="@+id/back_button"
@@ -28,7 +34,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="2dp"
-        android:background="#f8fafc"
+        android:background="@drawable/test"
         android:contentDescription="Go Back"
         android:minHeight="40dp"
         android:onClick="back"
@@ -187,6 +193,7 @@
         />
 
     <Button
+        android:id="@+id/bookBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Continue To Book"

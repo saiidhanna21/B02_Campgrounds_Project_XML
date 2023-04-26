@@ -1,11 +1,10 @@
 package com.example.b02_campgrounds_project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Home extends AppCompatActivity {
 

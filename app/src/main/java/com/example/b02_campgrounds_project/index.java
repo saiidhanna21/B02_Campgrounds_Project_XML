@@ -1,6 +1,5 @@
 package com.example.b02_campgrounds_project;
 
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -38,11 +37,10 @@ public class index extends AppCompatActivity {
         getId = new ArrayList<>();
         getImages = new ArrayList<>();
         setContentView(R.layout.activity_index);
-        hori= findViewById(R.id.mother);
-        welcome=findViewById(R.id.welcome);
+        hori = findViewById(R.id.mother);
+        welcome = findViewById(R.id.welcome);
 
 
-        
         Bundle extra = getIntent().getBundleExtra("extra");
         getTitle = (ArrayList<String>) extra.getSerializable("getTitle");
         getDescription = (ArrayList<String>) extra.getSerializable("getDescription");
@@ -51,48 +49,59 @@ public class index extends AppCompatActivity {
         getImages = (ArrayList<String>) extra.getSerializable("getImages");
         username = extra.getString("username");
 
-        if(extra.containsKey("source")&& extra.get("source").equals("login")){
-            source="source";
-            welcome.setText("Welcome back "+username);
-        }else{
-            welcome.setText("Welcome "+username);
+        if (extra.containsKey("source") && extra.get("source").equals("login")) {
+            source = "source";
+            welcome.setText("Welcome back " + username);
+        } else {
+            welcome.setText("Welcome " + username);
         }
 
-        ArrayList<View>arrayView=new ArrayList<>();
-        ArrayList<TextView>arrayPerNight=new ArrayList<>();
-        ArrayList<TextView>arrayTitle=new ArrayList<>();
-        ArrayList<TextView>arrayPrice=new ArrayList<>();
-        ArrayList<LinearLayout>arrayPriceNight=new ArrayList<>();
-        ArrayList<LinearLayout>arrayPriceGo=new ArrayList<>();
-        ArrayList<LinearLayout>arrayBody=new ArrayList<>();
-        ArrayList<TextView>arrayDescription=new ArrayList<>();
-        ArrayList<LinearLayout>arrayVerti=new ArrayList<>();
-        ArrayList<ImageButton>arrayImage=new ArrayList<>();
+        ArrayList<View> arrayView = new ArrayList<>();
+        ArrayList<TextView> arrayPerNight = new ArrayList<>();
+        ArrayList<TextView> arrayTitle = new ArrayList<>();
+        ArrayList<TextView> arrayPrice = new ArrayList<>();
+        ArrayList<LinearLayout> arrayPriceNight = new ArrayList<>();
+        ArrayList<LinearLayout> arrayPriceGo = new ArrayList<>();
+        ArrayList<LinearLayout> arrayBody = new ArrayList<>();
+        ArrayList<TextView> arrayDescription = new ArrayList<>();
+        ArrayList<LinearLayout> arrayVerti = new ArrayList<>();
+        ArrayList<ImageButton> arrayImage = new ArrayList<>();
 
-        for (int i = 0; i < getTitle.size();i++) {
+        ImageView v;
+        if(getTitle.size()==0){
+            TextView message = new TextView(this);
+            message.setText("No Campgrounds Available!");
+            message.setTypeface(ResourcesCompat.getFont(this, R.font.sora));
+            message.setAlpha((float) 0.8);
+            message.setTextSize(30);
+            hori.addView(message);
+        }
+        for (int i = 0; i < getTitle.size(); i++) {
 
             LinearLayout verti = new LinearLayout(this);
-            verti.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+            verti.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
             verti.setOrientation(LinearLayout.VERTICAL);
             FrameLayout.LayoutParams lp1 = (FrameLayout.LayoutParams) verti.getLayoutParams();
-            lp1.setMargins(100, 25, 0, 25);
+            lp1.setMargins(140, 25, 140, 25);
             verti.setLayoutParams(lp1);
             arrayVerti.add(verti);
 
 
             LinearLayout body = new LinearLayout(this);
-            body.setLayoutParams(new LinearLayout.LayoutParams(675, 400));
+            body.setLayoutParams(new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 400));
             body.setBackgroundColor(Color.parseColor("#FFCA42"));
             body.setPadding(55, 20, 0, 0);
             body.setOrientation(LinearLayout.VERTICAL);
             arrayBody.add(body);
 
 
+            v = new ImageView(this);
+            v.setMinimumHeight(500);
+            v.setMaxHeight(500);
+            v.setAdjustViewBounds(true);
+            v.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-
-            ImageView v= new ImageView(this);
-
-            String url = "http://192.168.1.105/CampProject/assets/"+getImages.get(i);
+            String url = "http://192.168.1.105/FYP_Project/assets/" + getImages.get(i);
 
             Glide.with(this).load(url)
                     .placeholder(R.drawable.reloading)
@@ -130,8 +139,8 @@ public class index extends AppCompatActivity {
 
             TextView price = new TextView(this);
             price.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 90));
-            priceValue=Pricer.get(i).toString();
-            price.setText("$"+priceValue);
+            priceValue = Pricer.get(i).toString();
+            price.setText("$" + priceValue);
             price.setTextColor(Color.parseColor("#1F5460"));
             price.setTextSize(23);
             arrayPrice.add(price);
@@ -145,23 +154,23 @@ public class index extends AppCompatActivity {
 
 
             LinearLayout priceGo = new LinearLayout(this);
-            priceGo.setLayoutParams(new LinearLayout.LayoutParams(675, 165));
+            priceGo.setLayoutParams(new LinearLayout.LayoutParams(675, 200));
             priceGo.setOrientation(LinearLayout.HORIZONTAL);
             priceGo.setPadding(0, 30, 0, 0);
             priceGo.addView(priceNight);
             arrayPriceGo.add(priceGo);
 
             ImageButton go = new ImageButton(this);
-            go.setLayoutParams(new LinearLayout.LayoutParams(90, 90));
+            go.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
             go.setBackgroundResource(R.drawable.rectangle_bg_light_green_100_border_white_a700_19_radius_8);
             go.setImageResource(R.drawable.img_frame4);
             int finalI = i;
             go.setOnClickListener(view -> {
                 Intent intent1 = new Intent(index.this, getImages.class);
-                intent1.putExtra("CampId",getId.get(finalI));
-                intent1.putExtra("username",username);
-                if(!Objects.equals(source, "")){
-                    intent1.putExtra("source","login");
+                intent1.putExtra("CampId", getId.get(finalI));
+                intent1.putExtra("username", username);
+                if (!Objects.equals(source, "")) {
+                    intent1.putExtra("source", "login");
                 }
                 startActivity(intent1);
             });
@@ -170,21 +179,23 @@ public class index extends AppCompatActivity {
 
         }
 
-        for (int i = 0; i < getTitle.size();i++) {
+        for (int i = 0; i < getTitle.size(); i++) {
 
-                arrayBody.get(i).addView(arrayTitle.get(i));
-                arrayBody.get(i).addView(arrayDescription.get(i));
-                arrayBody.get(i).addView(arrayPriceGo.get(i));
-                arrayVerti.get(i).addView(arrayView.get(i));
-                arrayVerti.get(i).addView(arrayBody.get(i));
-                hori.addView(arrayVerti.get(i));
-            }
+            arrayBody.get(i).addView(arrayTitle.get(i));
+            arrayBody.get(i).addView(arrayDescription.get(i));
+            arrayBody.get(i).addView(arrayPriceGo.get(i));
+            arrayVerti.get(i).addView(arrayView.get(i));
+            arrayVerti.get(i).addView(arrayBody.get(i));
+            hori.addView(arrayVerti.get(i));
         }
+
     }
-//HEK bteshabe l id taba3 l camp li kbaste 3laya wel textview bas for tchoufi 3al cheche ka test
-//        TextView test=findViewById(R.id.anything);
-//        Bundle user=getIntent().getExtras();
-//        if(user!=null) {
-//        int id= (int) user.get("CampId");
-//        test.setText("the id is: "+id);
-//        }
+    public void history(View v){
+        Intent intent = new Intent(index.this, DbHistory.class);
+        intent.putExtra("username", username);
+        if (!Objects.equals(source, "")) {
+            intent.putExtra("source", "login");
+        }
+        startActivity(intent);
+    }
+    }

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,8 +26,8 @@ import java.util.Objects;
 public class showCamp extends AppCompatActivity {
     private TextView campRating , campTitle , campPrice , campLocation , campOwner , campDescription;
     private int campId , userId;
-    private String username,source="";
-
+    private String username,source="",profile="";
+    Button bookBtn;
     private LinearLayout displayImages;
     private ArrayList<String> images ;
 
@@ -35,6 +36,7 @@ public class showCamp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_camp);
+        bookBtn=findViewById(R.id.bookBtn);
 
         campRating = (TextView) findViewById(R.id.campRating);
         campTitle = (TextView) findViewById(R.id.campTitle);
@@ -51,6 +53,10 @@ public class showCamp extends AppCompatActivity {
         images = (ArrayList<String>)extra.getSerializable("images");
         if(extra.containsKey("source")&& extra.get("source").equals("login"))
             source="source";
+        if(extra.containsKey("profile")) {
+            bookBtn.setText("Back To Your Profile");
+            profile = "profile";
+        }
 
         for(int i=0; i<images.size();i++){
             ImageView v= new ImageView(this);
@@ -62,7 +68,7 @@ public class showCamp extends AppCompatActivity {
                             ViewGroup.LayoutParams.MATCH_PARENT ) );
             v.setScaleType(ImageView.ScaleType.FIT_XY);
 
-            String url = "http://192.168.1.105/CampProject/assets/"+images.get(i);
+            String url = "http://192.168.1.105/FYP_Project/assets/"+images.get(i);
 
             Glide.with(this).load(url)
                     .placeholder(R.drawable.reloading)
@@ -139,22 +145,41 @@ public class showCamp extends AppCompatActivity {
     }
 
     public void book(View v){
-        Intent intent = new Intent(showCamp.this , BookCamp.class);
-        intent.putExtra("CampId" , campId);
-        intent.putExtra("username"  , username);
-        intent.putExtra("UserId",userId);
-        if(!Objects.equals(source, "")){
-            intent.putExtra("source","login");
+        if(!Objects.equals(profile, "")){
+            Intent intent = new Intent(showCamp.this , DbHistory.class);
+            intent.putExtra("username", username);
+            if (!Objects.equals(source, "")) {
+                intent.putExtra("source", "login");
+            }
+            startActivity(intent);
+        }else {
+            Intent intent = new Intent(showCamp.this, BookCamp.class);
+            intent.putExtra("CampId", campId);
+            intent.putExtra("username", username);
+            intent.putExtra("UserId", userId);
+            if (!Objects.equals(source, "")) {
+                intent.putExtra("source", "login");
+            }
+            startActivity(intent);
         }
-        startActivity(intent);
     }
 
     public void back(View v){
+        if(!Objects.equals(profile, "")){
+            Intent intent = new Intent(showCamp.this , DbHistory.class);
+            intent.putExtra("username", username);
+            if (!Objects.equals(source, "")) {
+                intent.putExtra("source", "login");
+            }
+            startActivity(intent);
+        }
+            else{
         Intent intent = new Intent(showCamp.this , getDbCamp.class);
         intent.putExtra("username"  , username);
         if(!Objects.equals(source, "")){
             intent.putExtra("source","login");
         }
         startActivity(intent);
+      }
     }
 }

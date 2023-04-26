@@ -19,7 +19,7 @@ import java.util.Objects;
 public class getImages extends AppCompatActivity {
     private final String url = "http://192.168.1.105/CampProject/getImages.php";
     private int campId;
-    private String username,source="";
+    private String username,source="",profile="";
     private JSONArray images;
     private ArrayList<String> result;
 
@@ -33,6 +33,8 @@ public class getImages extends AppCompatActivity {
         username = extra.getString("username");
         if(extra.containsKey("source")&& extra.get("source").equals("login"))
             source="source";
+        if(extra.containsKey("profile"))
+            profile="profile";
 
         result = new ArrayList<String>();
 
@@ -60,6 +62,9 @@ public class getImages extends AppCompatActivity {
                     intent.putExtra("images" , result);
                     if(!Objects.equals(source, "")){
                         intent.putExtra("source","login");
+                    }
+                    if(!Objects.equals(profile, "")){
+                        intent.putExtra("profile","profile");
                     }
                     startActivity(intent);
 

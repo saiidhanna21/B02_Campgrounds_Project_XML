@@ -1,6 +1,5 @@
 package com.example.b02_campgrounds_project;
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -116,5 +115,6 @@ public class signup extends AppCompatActivity {
     public void back(View v){
         super.onBackPressed();
     }
+
 
 }

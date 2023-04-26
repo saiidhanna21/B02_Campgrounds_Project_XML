@@ -14,7 +14,7 @@
         android:layout_height="48dp"
         android:layout_gravity="start"
         android:layout_margin="2dp"
-        android:background="#f8fafc"
+        android:background="@drawable/test"
         android:contentDescription="Go Back"
         android:minHeight="40dp"
         android:src="@drawable/back_arrow"

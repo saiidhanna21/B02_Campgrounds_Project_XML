@@ -42,6 +42,12 @@
         <activity
             android:name=".getDbCamp"
             android:exported="true" />
+        <activity
+            android:name=".DbHistory"
+            android:exported="true" />
+        <activity
+            android:name=".Profile"
+            android:exported="true" />
         
     </application>
 
